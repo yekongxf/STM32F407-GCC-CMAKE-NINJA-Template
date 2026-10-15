@@ -42,14 +42,26 @@ target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user defined library search paths
 )
 
+
+#自动搜集 Application 和 Components 目录下的所有.c文件
+file(GLOB_RECURSE USER_SOURCES
+    "Application/*.c"
+    "Components/*.c"
+)
+
 # Add sources to executable
-target_sources(${CMAKE_PROJECT_NAME} PRIVATE
+target_sources(${CMAKE_PROJECT_NAME} PRIVATE   #添加源文件.c路径
     # Add user sources here
+    ${USER_SOURCES}                      
+
 )
 
 # Add include paths
-target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
+target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE      #添加头文件.h路径
     # Add user defined include paths
+    Application/Inc
+    Components/bsp/led 
+    Components/third_party/FressModbus  
 )
 
 # Add project symbols (macros)
